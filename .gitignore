@@ -1,0 +1,11 @@
+#dependencies
+node_modules
+
+# output
+build/
+stats.json
+src
+
+# log files
+yarn-error.log
+npm-debug.log
