@@ -17,7 +17,6 @@ const webpackConfig = merge(baseWebpackConfig, {
         // 开发环境的 host 和 port，允许自定义
         // 如果你使用 Docker, Vagrant 或 Cloud9 虚拟机，
         // 你可以设置 host: "0.0.0.0";
-        //
         // 不像默认的 `localhost`，0.0.0.0 适用于所有的网络设备。
         host: process.env.HOST, // 默认是：`localhost`
         port: process.env.PORT, // 默认是：8080
@@ -37,7 +36,6 @@ const webpackConfig = merge(baseWebpackConfig, {
             // Delay the rebuild after the first change
             // 非常好性能, 根据情况进行注释
             aggregateTimeout: 300,
-
             // Poll using interval (in ms, accepts boolean too)
             poll: 1000
         }

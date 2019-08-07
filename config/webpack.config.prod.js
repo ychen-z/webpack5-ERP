@@ -194,15 +194,15 @@ const webpackConfig = smp.wrap(
                         priority: 10,
                         reuseExistingChunk: false
                         // enforce: true
+                    },
+                    styles: {
+                        name: 'styles',
+                        test: /\.(css)$/,
+                        chunks: 'all',
+                        minChunks: 1,
+                        reuseExistingChunk: true,
+                        enforce: true
                     }
-                    // styles: {
-                    //     name: 'styles',
-                    //     test: /\.(less|css)$/,
-                    //     chunks: 'all',
-                    //     minChunks: 1,
-                    //     reuseExistingChunk: true,
-                    //     enforce: true
-                    // }
                 }
                 // //最小的文件大小 超过之后将不予打包
                 // minSize: {
