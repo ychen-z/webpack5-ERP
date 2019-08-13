@@ -16,6 +16,8 @@ module.exports = {
 
         'no-console': 'off', // 允许使用console
 
+        'react/jsx-no-target-blank': 'off', // a链接允许直接使用_blank
+
         'prettier/prettier': 'warn', // 对于prettier报错进行warn提醒
     }
 }

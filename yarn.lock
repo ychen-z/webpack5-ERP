@@ -25,9 +25,9 @@
     "@ant-design/colors" "^3.1.0"
     babel-runtime "^6.26.0"
 
-"@ant-design/icons@~2.1.0":
+"@ant-design/icons@~2.1.1":
   version "2.1.1"
-  resolved "https://registry.npm.taobao.org/@ant-design/icons/download/@ant-design/icons-2.1.1.tgz?cache=0&sync_timestamp=1564482299810&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40ant-design%2Ficons%2Fdownload%2F%40ant-design%2Ficons-2.1.1.tgz#7b9c08dffd4f5d41db667d9dbe5e0107d0bd9a4a"
+  resolved "https://registry.npm.taobao.org/@ant-design/icons/download/@ant-design/icons-2.1.1.tgz#7b9c08dffd4f5d41db667d9dbe5e0107d0bd9a4a"
   integrity sha1-e5wI3/1PXUHbZn2dvl4BB9C9mko=
 
 "@babel/cli@^7.2.3":
@@ -1451,13 +1451,13 @@ ant-design-pro@^0.3.1:
     react-document-title "^2.0.3"
     react-fittext "^1.0.0"
 
-antd@3.20.0:
-  version "3.20.0"
-  resolved "https://registry.npm.taobao.org/antd/download/antd-3.20.0.tgz#da8b9b537dd27d2b8bea6b0b1518ed602e58783e"
-  integrity sha1-2oubU33SfSuL6msLFRjtYC5YeD4=
+antd@3.20.1:
+  version "3.20.1"
+  resolved "https://registry.npm.taobao.org/antd/download/antd-3.20.1.tgz#b6274517bab290754a10907a87a23b2fd8e39417"
+  integrity sha1-tidFF7qykHVKEJB6h6I7L9jjlBc=
   dependencies:
     "@ant-design/create-react-context" "^0.2.4"
-    "@ant-design/icons" "~2.1.0"
+    "@ant-design/icons" "~2.1.1"
     "@ant-design/icons-react" "~2.0.1"
     "@types/react-slick" "^0.23.4"
     array-tree-filter "^2.1.0"
@@ -7268,6 +7268,13 @@ postcss-env-function@^2.0.2:
     postcss "^7.0.2"
     postcss-values-parser "^2.0.0"
 
+postcss-flexbugs-fixes@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.npm.taobao.org/postcss-flexbugs-fixes/download/postcss-flexbugs-fixes-4.1.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fpostcss-flexbugs-fixes%2Fdownload%2Fpostcss-flexbugs-fixes-4.1.0.tgz#e094a9df1783e2200b7b19f875dcad3b3aff8b20"
+  integrity sha1-4JSp3xeD4iALexn4ddytOzr/iyA=
+  dependencies:
+    postcss "^7.0.0"
+
 postcss-focus-visible@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/postcss-focus-visible/download/postcss-focus-visible-4.0.0.tgz#477d107113ade6024b14128317ade2bd1e17046e"
@@ -10444,10 +10451,10 @@ webpack-sources@^1.1.0, webpack-sources@^1.4.0, webpack-sources@^1.4.1:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack@^4.38.0:
-  version "4.39.0"
-  resolved "https://registry.npm.taobao.org/webpack/download/webpack-4.39.0.tgz#1d511308c3dd8f9fe3152c9447ce30f1814a620c"
-  integrity sha1-HVETCMPdj5/jFSyUR84w8YFKYgw=
+webpack@^4.39.1:
+  version "4.39.1"
+  resolved "https://registry.npm.taobao.org/webpack/download/webpack-4.39.1.tgz?cache=0&sync_timestamp=1565103802620&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fwebpack%2Fdownload%2Fwebpack-4.39.1.tgz#60ed9fb2b72cd60f26ea526c404d2a4cc97a1bd8"
+  integrity sha1-YO2fsrcs1g8m6lJsQE0qTMl6G9g=
   dependencies:
     "@webassemblyjs/ast" "1.8.5"
     "@webassemblyjs/helper-module-context" "1.8.5"

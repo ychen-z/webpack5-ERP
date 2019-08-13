@@ -5,12 +5,7 @@ const baseWebpackConfig = require('./webpack.base');
 const webpackConfig = merge(baseWebpackConfig, {
     mode: 'development',
     cache: true,
-    devtool: 'cheap-module-eval-source-map', // 报错的时候在控制台输出哪一行报错
-    watchOptions: {
-        // ignored: [/node_modules/, '/dll/'], // 不监听目录
-        aggregateTimeout: 300, // 防止重复保存频繁重新编译,300ms内重复保存不打包
-        poll: 1000 // 每秒询问的文件变更的次数
-    },
+    devtool: 'source-map',
     plugins: [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()],
     devServer: {
         // 为了减少输出量，可以只显示错误
@@ -21,15 +16,32 @@ const webpackConfig = merge(baseWebpackConfig, {
         host: process.env.HOST, // 默认是：`localhost`
         port: process.env.PORT, // 默认是：8080
         open: true, // 浏览器自启动
-        quiet: true,
+        quiet: false,
         overlay: true, // 开启浏览器端的错误浮层功能
         proxy: {
-            '/api/*': {
-                target: 'http://10.171.160.132:8800',
+            '/mock': {
+                target: 'http://localhost:3000',
+                secure: false,
                 pathRewrite: {
-                    '/api': '/api'
+                    '^/mock': ''
                 },
-                secure: false
+                changeOrigin: true
+            },
+            '/dev': {
+                target: 'http://10.171.160.65:8800',
+                secure: false,
+                pathRewrite: {
+                    '^/dev': ''
+                },
+                changeOrigin: true
+            },
+            '/test': {
+                target: 'http://10.171.160.132:8800',
+                secure: false,
+                pathRewrite: {
+                    '^/test': ''
+                },
+                changeOrigin: true
             }
         },
         watchOptions: {

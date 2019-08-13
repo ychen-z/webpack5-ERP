@@ -1,6 +1,6 @@
 const path = require('path');
 const merge = require('webpack-merge');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const TerserPlugin = require('terser-webpack-plugin');
@@ -17,7 +17,6 @@ const smp = new SpeedMeasurePlugin();
 const baseWebpackConfig = require('./webpack.base');
 const paths = require('./path');
 const publicPath = paths.servedPath;
-const PUBLIC_PATH = '/';
 
 const vendorEntry = require(paths.vendorConfig).entry;
 
@@ -46,16 +45,8 @@ const webpackConfig = smp.wrap(
         },
         module: {},
         plugins: [
+            new CleanWebpackPlugin(),
             new BundleAnalyzerPlugin(),
-            /**
-             * 在window环境中注入全局变量
-             * 这里这么做是因为src/serviceWorker.js中有用到，为了配置PWA
-             * */
-            new webpack.DefinePlugin({
-                'process.env': JSON.stringify({
-                    PUBLIC_URL: PUBLIC_PATH.replace(/\/$/, '')
-                })
-            }),
             new MiniCssExtractPlugin({
                 // Options similar to the same options in webpackOptions.output
                 // both options are optional
@@ -63,12 +54,12 @@ const webpackConfig = smp.wrap(
                 chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
             }),
 
-            // new OptimizeCSSAssetsPlugin({
-            //   cssProcessorOptions: {
-            //     parser: safePostCssParser,
-            //     safe: true
-            //   }
-            // }), // use OptimizeCSSAssetsPlugin
+            new OptimizeCSSAssetsPlugin({
+                cssProcessorOptions: {
+                    parser: safePostCssParser,
+                    safe: true
+                }
+            }), // use OptimizeCSSAssetsPlugin
             // new WebpackParallelUglifyPlugin({
             //   uglifyJS: {
             //     output: {
@@ -109,8 +100,6 @@ const webpackConfig = smp.wrap(
             new webpack.HashedModuleIdsPlugin()
             // 这里是用于把manifest.json打包时复制到/dist下 （PWA）
             // new CopyWebpackPlugin([{ from: path.join(basePath, './public/manifest.json'), to: path.join(outDir, './manifest.json') }]),
-
-            // new CleanWebpackPlugin(path.join(__dirname, 'build'))
         ],
         optimization: {
             // sideEffects: false,

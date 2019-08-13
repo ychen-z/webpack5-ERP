@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-const WebpackBar = require('webpackbar');
+// const WebpackBar = require('webpackbar');
 const paths = require('./path');
 // const PnpWebpackPlugin = require('pnp-webpack-plugin'); 看看是否必须
 const HappyPack = require('happypack');
@@ -38,11 +38,12 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
             options: {
                 ident: 'postcss',
                 plugins: () => [
-                    //require('postcss-flexbugs-fixes'),
+                    require('postcss-flexbugs-fixes'),
                     require('postcss-preset-env')({
                         autoprefixer: {
                             flexbox: 'no-2009'
                         },
+                        browsers: ['> 1%', 'last 2 versions'], // autoprefixer 前缀命令
                         stage: 3
                     })
                 ],
@@ -143,27 +144,27 @@ module.exports = {
                     {
                         test: /\.(js|jsx)$/,
                         include: paths.appSrc,
-                        //loader: require.resolve('babel-loader'),
-                        use: 'happypack/loader?id=babel',
-                        // options: {
-                        //     customize: require.resolve('babel-preset-react-app/webpack-overrides'),
-                        //     plugins: [
-                        //         [
-                        //             require.resolve('babel-plugin-named-asset-import'),
-                        //             {
-                        //                 loaderMap: {
-                        //                     svg: {
-                        //                         ReactComponent: '@svgr/webpack?-svgo![path]'
-                        //                     }
-                        //                 }
-                        //             }
-                        //         ],
-                        //         ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]
-                        //     ],
-                        //     cacheDirectory: true,
-                        //     cacheCompression: isProduction,
-                        //     compact: isProduction
-                        // }
+                        loader: require.resolve('babel-loader'),
+                        //use: 'happypack/loader?id=babel',
+                        options: {
+                            customize: require.resolve('babel-preset-react-app/webpack-overrides'),
+                            plugins: [
+                                [
+                                    require.resolve('babel-plugin-named-asset-import'),
+                                    {
+                                        loaderMap: {
+                                            svg: {
+                                                ReactComponent: '@svgr/webpack?-svgo![path]'
+                                            }
+                                        }
+                                    }
+                                ],
+                                ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]
+                            ],
+                            cacheDirectory: true,
+                            cacheCompression: isProduction,
+                            compact: isProduction
+                        }
                     },
                     // "postcss" loader applies autoprefixer to our CSS.
                     // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -242,14 +243,14 @@ module.exports = {
         ]
     },
     plugins: [
-        new HappyPack({
-            // 用唯一的标识符 id 来代表当前的 HappyPack 是用来处理一类特定的文件
-            id: 'babel',
-            threadPool: happyThreadPool,
-            verbose: true,
-            threads: 4, // 不知为何写了threads 反而变慢了 如何处理 .js 文件，用法和 Loader 配置中一样
-            loaders: ['babel-loader?cacheDirectory']
-        }),
+        // new HappyPack({
+        //     // 用唯一的标识符 id 来代表当前的 HappyPack 是用来处理一类特定的文件
+        //     id: 'babel',
+        //     threadPool: happyThreadPool,
+        //     verbose: true,
+        //     threads: 4, // 不知为何写了threads 反而变慢了 如何处理 .js 文件，用法和 Loader 配置中一样
+        //     loaders: ['babel-loader?cacheDirectory']
+        // }),
 
         // 暂停使用happypack编译less: https://github.com/amireh/happypack/issues/223
         // new HappyPack({
@@ -293,10 +294,10 @@ module.exports = {
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         // 与 devServer watchOptions 并存，不监听node_modules
         new webpack.WatchIgnorePlugin([path.join(__dirname, 'node_modules')]),
-        new WebpackBar({
-            minimal: false,
-            compiledIn: false
-        })
+        // new WebpackBar({
+        //     minimal: false,
+        //     compiledIn: false
+        // })
     ],
     node: {
         module: 'empty',
