@@ -43,6 +43,7 @@ module.exports = {
     env: isProduction ? 'production' : 'development',
     dotenv: resolveApp('.env'),
     appBuild: resolveApp('build'),
+    vendor: resolveApp('vendor'),
     appPublic: resolveApp('public'),
     appHtml: resolveApp('public/index.html'),
     appIndexJs: resolveApp('test/index.js'),

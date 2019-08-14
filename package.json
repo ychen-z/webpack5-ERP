@@ -9,6 +9,7 @@
         "start": "npm run dev",
         "dev": "cross-env NODE_ENV='development' webpack-dev-server --open --config config/webpack.config.dev.js --mode development",
         "build": "cross-env NODE_ENV='production' webpack --config config/webpack.config.prod.js --mode production",
+        "build-vendor": "webpack --config config/webpack.react.config.js --mode development",
         "format": "prettier --write \"./src/**/*.{js,jsx,json}\"",
         "lint": "eslint --fix --ext .js,.jsx src",
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -88,6 +89,7 @@
         "ant-design-pro": "^0.3.1",
         "antd": "3.20.1",
         "axios": "^0.16.2",
+        "copy-webpack-plugin": "^5.0.4",
         "echarts-for-react": "^1.4.4",
         "immutable": "^3.8.2",
         "lodash": "^4.17.4",

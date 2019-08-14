@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { cube } from './util';
+import b from './utils/tool';
 import A from './A';
 import './index.less';
 import './1.less';
 import './2.less';
 
 class Index extends Component {
+    componentWillMount() {
+        console.log(b.a());
+        console.log(b.c());
+    }
     render() {
         return (
             <div>

@@ -1,9 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-// const WebpackBar = require('webpackbar');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WebpackBar = require('webpackbar');
 const paths = require('./path');
 // const PnpWebpackPlugin = require('pnp-webpack-plugin'); 看看是否必须
 const HappyPack = require('happypack');
@@ -13,17 +14,96 @@ const happyThreadPool = HappyPack.ThreadPool({
     size: os.cpus().length
 });
 
+/* eslint-disable */
+function resolve(dir) {
+    return path.resolve(__dirname, '..', dir)
+}
+
 const isProduction = paths.isProduction;
+const sourceMap = paths.sourceMap;
 const isDevelopment = !isProduction;
 const publicPath = '/';
 const shouldUseSourceMap = paths.sourceMap;
 
 // style files regexes
 const cssRegex = /\.css$/;
-const cssModuleRegex = /\.module\.css$/;
-
 const lessRegex = /\.less$/;
-const lessModuleRegex = /\.module\.less/;
+
+
+/**
+ * 统一处理css-loader
+ * @param {*} options
+ */
+function cssLoaders(options) {
+    options = options || {}
+
+    const cssLoader = {
+        loader: 'css-loader',
+        options: {
+            sourceMap: options.sourceMap
+        }
+    }
+    if (options.modules) {
+        cssLoader.options = {
+            ...cssLoader.options,
+            ...{
+                modules: true,
+                importLoaders: 1,
+                localIdentName: '[name]__[local]--[hash:base64:5]'
+            }
+        }
+    }
+
+    const postcssLoader = {
+        loader: 'postcss-loader',
+        options: {
+            sourceMap: options.sourceMap,
+            ident: 'postcss',
+            plugins: [
+                // eslint-disable-next-line
+                require('postcss-preset-env')()
+            ]
+        }
+    }
+
+    // generate loader string to be used with extract text plugin
+    function generateLoaders(loader, loaderOptions) {
+        const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
+
+        if (loader) {
+            loaders.push({
+                loader: `${loader}-loader`,
+                options: Object.assign({}, loaderOptions, { sourceMap: options.sourceMap })
+            })
+        }
+
+        // Extract CSS when that option is specified (which is the case during
+        // production build)
+        if (options.extract) {
+            loaders.unshift(MiniCssExtractPlugin.loader)
+
+            return loaders
+            // return ExtractTextPlugin.extract({use: loaders, fallback: 'style-loader'});
+        }
+        // mini-css-extract-plugin 不支持css热更新。因此需在开发环境引入 css-hot-loader，以便支持css热更新
+        return ['css-hot-loader', 'style-loader'].concat(loaders)
+    }
+
+    // https://vue-loader.vuejs.org/en/configurations/extract-css.html
+    return {
+        css: generateLoaders(),
+        postcss: generateLoaders(),
+        less: generateLoaders('less', {
+            javascriptEnabled: true, modifyVars: {
+                'primary-color': '#e6231f'
+            },
+        }),
+        sass: generateLoaders('sass', { indentedSyntax: true }),
+        scss: generateLoaders('sass'),
+        stylus: generateLoaders('stylus'),
+        styl: generateLoaders('stylus')
+    }
+}
 
 const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
@@ -144,6 +224,7 @@ module.exports = {
                     {
                         test: /\.(js|jsx)$/,
                         include: paths.appSrc,
+                        exclude: /node_modules/,
                         loader: require.resolve('babel-loader'),
                         //use: 'happypack/loader?id=babel',
                         options: {
@@ -174,50 +255,77 @@ module.exports = {
                     // By default we support CSS Modules with the extension .module.css
 
                     // Opt-in support for LESS (using .less extensions).
+                   
+                   
+                    // {
+                    //     test: lessRegex,
+                    //     use: getStyleLoaders(
+                    //         {
+                    //             importLoaders: 3,
+                    //             sourceMap: isProduction ? shouldUseSourceMap : isDevelopment,
+                    //             modifyVars: {
+                    //                 'primary-color': '#e6231f'
+                    //             },
+                    //             javascriptEnabled: true
+                    //         },
+                    //         'less-loader'
+                    //     ),
+                    //     sideEffects: true
+                    // },
+
+                    // {
+                    //     test: cssRegex,
+                    //     exclude: /node_modules/,
+                    //     include: paths.appSrc,
+                    //     use: getStyleLoaders({
+                    //         importLoaders: 1
+                    //     })
+                    // },
+
                     {
-                        test: lessRegex,
-                        use: getStyleLoaders(
-                            {
-                                importLoaders: 3,
-                                sourceMap: isProduction ? shouldUseSourceMap : isDevelopment,
-                                modifyVars: {
-                                    'primary-color': '#e6231f'
-                                },
-                                javascriptEnabled: true
-                            },
-                            'less-loader'
-                        ),
-                        sideEffects: true
+                        test: /\.css$/,
+                        use: cssLoaders({
+                            sourceMap,
+                            extract: isProduction,
+                            usePostCSS: true,
+                            modules: true
+                        }).css,
+                        include: paths.appSrc
                     },
                     {
-                        test: lessModuleRegex,
-                        use: getStyleLoaders(
-                            {
-                                importLoaders: 3,
-                                sourceMap: isProduction ? shouldUseSourceMap : isDevelopment,
-                                modules: true,
-                                getLocalIdent: getCSSModuleLocalIdent
-                            },
-                            'less-loader'
-                        )
+                        test: /\.css$/,
+                        use: cssLoaders({
+                            sourceMap,
+                            extract: isProduction,
+                            usePostCSS: true,
+                            modules: false
+                        }).css,
+                        include: resolve('node_modules')
                     },
 
                     {
-                        test: cssRegex,
-                        exclude: cssModuleRegex,
-                        use: getStyleLoaders({
-                            importLoaders: 1
-                        })
-                    },
-                    // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
-                    // using the extension .module.css
-                    {
-                        test: cssModuleRegex,
-                        use: getStyleLoaders({
-                            importLoaders: 1,
+                        test: /\.less$/,
+                        use: cssLoaders({
+                            sourceMap,
+                            extract: isProduction,
+                            usePostCSS: true,
                             modules: true,
-                            getLocalIdent: getCSSModuleLocalIdent
-                        })
+                            javascriptEnabled: true
+                        }).less,
+                        include: paths.appSrc
+                    },
+
+                    {
+                        test: /\.less?$/, // (用于解析antd的LESS文件)
+                        // 把对 .less 文件的处理转交给 id 为 less 的 HappyPack 实例
+                        include: [resolve('node_modules/antd')],
+                        // use: 'happypack/loader?id=node_modules_less'
+                        use: cssLoaders({
+                            sourceMap,
+                            extract: isProduction,
+                            usePostCSS: true,
+                            modules: false
+                        }).less
                     },
 
                     // "file" loader makes sure those assets get served by WebpackDevServer.
@@ -252,20 +360,6 @@ module.exports = {
         //     loaders: ['babel-loader?cacheDirectory']
         // }),
 
-        // 暂停使用happypack编译less: https://github.com/amireh/happypack/issues/223
-        // new HappyPack({
-        //     // 用唯一的标识符 id 来代表当前的 HappyPack 是用来处理一类特定的文件
-        //     id: 'node_modules_less',
-        //     threads: 2, // 不知为何写了threads 反而变慢了
-        //     // threadPool: happyThreadPool,
-        //     verbose: true,
-        //     // 如何处理 .less 文件，用法和 Loader 配置中一样
-        //     loaders: cssLoaders({
-        //         sourceMap, extract: isProduction, usePostCSS: false, // 编译 antd less时无法引入postcss
-        //         modules: false
-        //     }).less
-        // }),
-
         new HtmlWebpackPlugin({
             inject: true, // 是否将js放在body的末尾
             hash: false, // 防止缓存，在引入的文件后面加hash (PWA就是要缓存，这里设置为false)
@@ -291,13 +385,25 @@ module.exports = {
             chunksSortMode: 'dependency'
             // scripts: ['./dll/vendor.dll.js'] // 与dll配置文件中output.fileName对齐
         }),
+
+        new webpack.DllReferencePlugin({
+            manifest: path.join(paths.vendor, 'react.manifest.json')
+        }),
+
+        new CopyWebpackPlugin([
+            {
+                from: paths.vendor, //静态资源目录源地址
+                to: path.join(paths.appBuild, 'vendor') //目标地址，相对于output的path目录
+            }
+        ]),
+
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         // 与 devServer watchOptions 并存，不监听node_modules
         new webpack.WatchIgnorePlugin([path.join(__dirname, 'node_modules')]),
-        // new WebpackBar({
-        //     minimal: false,
-        //     compiledIn: false
-        // })
+        new WebpackBar({
+            minimal: false,
+            compiledIn: false
+        })
     ],
     node: {
         module: 'empty',

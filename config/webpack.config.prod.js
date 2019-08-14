@@ -1,6 +1,5 @@
 const path = require('path');
 const merge = require('webpack-merge');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const TerserPlugin = require('terser-webpack-plugin');
@@ -28,7 +27,7 @@ const webpackConfig = smp.wrap(
             {
                 main: [/*require.resolve('./polyfills'),*/ paths.appIndexJs]
             },
-            vendorEntry
+            //vendorEntry
         ),
         output: {
             // The build folder.
@@ -45,7 +44,6 @@ const webpackConfig = smp.wrap(
         },
         module: {},
         plugins: [
-            new CleanWebpackPlugin(),
             new BundleAnalyzerPlugin(),
             new MiniCssExtractPlugin({
                 // Options similar to the same options in webpackOptions.output
