@@ -3,6 +3,6 @@ import './index.less';
 
 export default class Example extends Component {
     render() {
-        return <div>example</div>;
+        return <div className="m-example">example</div>;
     }
 }

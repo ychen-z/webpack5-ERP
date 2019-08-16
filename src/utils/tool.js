@@ -1,6 +1,6 @@
 module.exports = {
-    c:()=>{
-        console.log('c')
+    c: () => {
+        console.log('c');
     },
     a: () => {
         console.log('a');
@@ -8,4 +8,4 @@ module.exports = {
     b: () => {
         console.log('b');
     }
-}
+};
