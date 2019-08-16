@@ -4,7 +4,7 @@ const paths = require('./path');
 
 module.exports = {
     entry: {
-        react: ['react', 'react-dom', 'antd']
+        react: ['react', 'react-router-dom', 'react-dom', 'antd']
     },
     output: {
         path: paths.vendor,

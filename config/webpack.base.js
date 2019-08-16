@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackBar = require('webpackbar');
@@ -141,9 +141,9 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
 };
 
 module.exports = {
-    cache: {
-        type: 'filesystem'
-    },
+    // cache: {
+    //     type: 'filesystem'
+    // },
     entry: paths.appIndexJs,
     output: {
         path: paths.appBuild,
@@ -175,7 +175,7 @@ module.exports = {
             // Support React Native Web
             // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-
             // native-for-web/ 'react-native': 'react-native-web', 全局相对路径别名，处理相对路径过长和繁琐问题
-            '@': paths.appSrc
+            '@': paths.appSrc,
         }
         // plugins: [PnpWebpackPlugin]
     },
@@ -351,6 +351,7 @@ module.exports = {
         ]
     },
     plugins: [
+       
         // new HappyPack({
         //     // 用唯一的标识符 id 来代表当前的 HappyPack 是用来处理一类特定的文件
         //     id: 'babel',

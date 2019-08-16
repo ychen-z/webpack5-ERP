@@ -1,6 +1,7 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const {CleanWebpackPlugin }= require('clean-webpack-plugin');
 // const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -44,7 +45,8 @@ const webpackConfig = smp.wrap(
         },
         module: {},
         plugins: [
-            new BundleAnalyzerPlugin(),
+            new CleanWebpackPlugin(),
+            // new BundleAnalyzerPlugin(),
             new MiniCssExtractPlugin({
                 // Options similar to the same options in webpackOptions.output
                 // both options are optional

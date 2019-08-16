@@ -1,0 +1,59 @@
+{
+    "extends": ["stylelint-config-standard", "stylelint-config-recess-order"],
+    "ignoreFiles": ["src/**/*.jsx"],
+    "rules": {
+        "indentation": 4,
+
+        "number-leading-zero": "never",
+
+        "string-quotes": "double",
+
+        "declaration-block-trailing-semicolon": "always",
+
+        "length-zero-no-unit": true,
+
+        "declaration-empty-line-before": [
+            "never",
+            { ignore: [ "after-declaration" ] }
+        ],
+        "rule-empty-line-before": [
+            "always",
+            { except: [ "after-single-line-comment", "first-nested" ] }
+        ],
+        "block-closing-brace-empty-line-before": [ "never" ],
+        "at-rule-empty-line-before": [
+            "always",
+            { ignore: [ "inside-block", "blockless-after-same-name-blockless" ] }
+        ],
+        "max-empty-lines": 1,
+        "no-eol-whitespace": true,
+        "no-missing-end-of-source-newline": true,
+
+        "unit-case": "lower",
+        "color-hex-case": "upper",
+        "value-keyword-case": "lower",
+        "function-name-case": "lower",
+        "property-case": "lower",
+        "at-rule-name-case": "lower",
+        "selector-pseudo-class-case": "lower",
+        "selector-pseudo-element-case": "lower",
+        "selector-type-case": "lower",
+        "media-feature-name-case": "lower",
+
+        "block-opening-brace-space-before": "always",
+        "comment-whitespace-inside": "always",
+        "declaration-colon-space-after": "always",
+        "declaration-colon-space-before": "never",
+        "declaration-block-semicolon-space-before": "never",
+        "function-comma-space-after": "always",
+        "selector-combinator-space-before": "always",
+        "selector-combinator-space-after": "always",
+        "selector-list-comma-space-after": "always",
+        "selector-list-comma-space-before": "never",
+        "selector-descendant-combinator-no-non-space": true,
+        "value-list-comma-space-after": "always",
+        "value-list-comma-space-before": "never",
+        "media-feature-colon-space-after": "always",
+        "media-feature-colon-space-before": "never"
+    }
+}

@@ -19,5 +19,7 @@ module.exports = {
         'react/jsx-no-target-blank': 'off', // a链接允许直接使用_blank
 
         'prettier/prettier': 'warn', // 对于prettier报错进行warn提醒
+
+        'jsx-a11y/anchor-has-content': 'off'
     }
 }
