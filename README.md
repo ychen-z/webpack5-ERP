@@ -1,11 +1,11 @@
-# webpack-loader
+# webpack-learning
 ## 简介
 这是一群热爱前端的同学，为了提升平时的开发效率，经过一番精心调研而诞生的一款**基于React + Webpack**的前端项目脚手架。
 
 该项目则是站在业务层的角度，对该SDK进行较为通用性的封装。
 
 ## 为什么会有这个项目？
- - 以前没有项目模板
+ - 以前没有项目脚手架
  - 原项目中使用的包版本过低
  - 原项目开发（编译/打包）效率欠佳
  - 不支持React 16、Webpack 4等主流工具的新版本/特性
@@ -31,9 +31,15 @@
 ## 使用方式
 ```js
 // Install all npm packages
-yarn
+1 、yarn install
 // or
 npm install
+
+2、yarn build-vendor
+
+3、yarn start
+
+4、yarn build
 ```
 
 ## 目录结构
