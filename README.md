@@ -20,13 +20,13 @@
 - [x] DLL动态链接库
 
 ## TODO
-- [] axios目录结构整理
-- [] routes目录结构整理
-- [] 组件目录结构整理
-- [] 支持全局引入variables.less
-- [] webpack多入口配置
-- [] 引入TypeScript（待定）
-- [] 等...
+- [ ] axios目录结构整理
+- [ ] routes目录结构整理
+- [ ] 组件目录结构整理
+- [ ] 支持全局引入variables.less
+- [ ] webpack多入口配置
+- [ ] 引入TypeScript（待定）
+- [ ] 等...
 
 ## 使用方式
 ```js
