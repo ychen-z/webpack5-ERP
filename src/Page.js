@@ -3,6 +3,7 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import E403 from '@/view/exception/403';
 import E404 from '@/view/exception/404';
 import E500 from '@/view/exception/500';
+import Effect from '@/test/Effect';
 import App from './App';
 export default () => (
     <Router>
@@ -12,6 +13,7 @@ export default () => (
             <Route path="/404" name="404" component={E404} />
             <Route path="/403" name="403" component={E403} />
             <Route path="/500" name="500" component={E500} />
+            <Route path="/hooks" name="Effect" component={Effect} />
             <Route component={E404} />
         </Switch>
     </Router>
