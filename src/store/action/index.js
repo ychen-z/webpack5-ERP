@@ -1,5 +1,5 @@
 import * as type from './type';
-import * as http from '@/axios/index';
+import * as http from '@/axios/api';
 
 const requestData = category => ({
     type: type.REQUEST_DATA,
