@@ -16,7 +16,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         host: process.env.HOST, // 默认是：`localhost`
         port: process.env.PORT, // 默认是：8080
         open: true, // 浏览器自启动
-        quiet: false,
+        quiet: true,
         overlay: true, // 开启浏览器端的错误浮层功能
         proxy: {
             '/mock': {

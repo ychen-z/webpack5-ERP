@@ -7,12 +7,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const paths = require('./path');
 // const PnpWebpackPlugin = require('pnp-webpack-plugin'); 看看是否必须
-const HappyPack = require('happypack');
-const os = require('os');
+// const HappyPack = require('happypack');
+// const os = require('os');
 
-const happyThreadPool = HappyPack.ThreadPool({
-    size: os.cpus().length
-});
+// const happyThreadPool = HappyPack.ThreadPool({
+//     size: os.cpus().length
+// });
 
 /* eslint-disable */
 function resolve(dir) {
@@ -257,76 +257,76 @@ module.exports = {
                     // Opt-in support for LESS (using .less extensions).
                    
                    
+                    {
+                        test: lessRegex,
+                        use: getStyleLoaders(
+                            {
+                                importLoaders: 3,
+                                sourceMap: isProduction ? shouldUseSourceMap : isDevelopment,
+                                modifyVars: {
+                                    'primary-color': '#e6231f'
+                                },
+                                javascriptEnabled: true
+                            },
+                            'less-loader'
+                        ),
+                        sideEffects: true
+                    },
+
+                    {
+                        test: cssRegex,
+                        exclude: /node_modules/,
+                        include: paths.appSrc,
+                        use: getStyleLoaders({
+                            importLoaders: 1
+                        })
+                    },
+
                     // {
-                    //     test: lessRegex,
-                    //     use: getStyleLoaders(
-                    //         {
-                    //             importLoaders: 3,
-                    //             sourceMap: isProduction ? shouldUseSourceMap : isDevelopment,
-                    //             modifyVars: {
-                    //                 'primary-color': '#e6231f'
-                    //             },
-                    //             javascriptEnabled: true
-                    //         },
-                    //         'less-loader'
-                    //     ),
-                    //     sideEffects: true
+                    //     test: /\.css$/,
+                    //     use: cssLoaders({
+                    //         sourceMap,
+                    //         extract: isProduction,
+                    //         usePostCSS: true,
+                    //         modules: true
+                    //     }).css,
+                    //     include: paths.appSrc
+                    // },
+                    // {
+                    //     test: /\.css$/,
+                    //     use: cssLoaders({
+                    //         sourceMap,
+                    //         extract: isProduction,
+                    //         usePostCSS: true,
+                    //         modules: false
+                    //     }).css,
+                    //     include: resolve('node_modules')
                     // },
 
                     // {
-                    //     test: cssRegex,
-                    //     exclude: /node_modules/,
-                    //     include: paths.appSrc,
-                    //     use: getStyleLoaders({
-                    //         importLoaders: 1
-                    //     })
+                    //     test: /\.less$/,
+                    //     use: cssLoaders({
+                    //         sourceMap,
+                    //         extract: isProduction,
+                    //         usePostCSS: true,
+                    //         modules: true,
+                    //         javascriptEnabled: true
+                    //     }).less,
+                    //     include: paths.appSrc
                     // },
 
-                    {
-                        test: /\.css$/,
-                        use: cssLoaders({
-                            sourceMap,
-                            extract: isProduction,
-                            usePostCSS: true,
-                            modules: true
-                        }).css,
-                        include: paths.appSrc
-                    },
-                    {
-                        test: /\.css$/,
-                        use: cssLoaders({
-                            sourceMap,
-                            extract: isProduction,
-                            usePostCSS: true,
-                            modules: false
-                        }).css,
-                        include: resolve('node_modules')
-                    },
-
-                    {
-                        test: /\.less$/,
-                        use: cssLoaders({
-                            sourceMap,
-                            extract: isProduction,
-                            usePostCSS: true,
-                            modules: true,
-                            javascriptEnabled: true
-                        }).less,
-                        include: paths.appSrc
-                    },
-
-                    {
-                        test: /\.less?$/, // (用于解析antd的LESS文件)
-                        // 把对 .less 文件的处理转交给 id 为 less 的 HappyPack 实例
-                        include: [resolve('node_modules/antd')],
-                        // use: 'happypack/loader?id=node_modules_less'
-                        use: cssLoaders({
-                            sourceMap,
-                            extract: isProduction,
-                            usePostCSS: true,
-                            modules: false
-                        }).less
-                    },
+                    // {
+                    //     test: /\.less?$/, // (用于解析antd的LESS文件)
+                    //     // 把对 .less 文件的处理转交给 id 为 less 的 HappyPack 实例
+                    //     include: [resolve('node_modules/antd')],
+                    //     // use: 'happypack/loader?id=node_modules_less'
+                    //     use: cssLoaders({
+                    //         sourceMap,
+                    //         extract: isProduction,
+                    //         usePostCSS: true,
+                    //         modules: false
+                    //     }).less
+                    // },
 
                     // "file" loader makes sure those assets get served by WebpackDevServer.
                     // When you `import` an asset, you get its (virtual) filename.

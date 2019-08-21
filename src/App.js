@@ -11,7 +11,8 @@ import zhCN from 'antd/lib/locale-provider/zh_CN';
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
+// const { Content, Footer } = Layout;
 class App extends Component {
     constructor(props) {
         super(props);
@@ -28,7 +29,7 @@ class App extends Component {
                         <Routes user={user} />
                     </LocaleProvider>
                 </Content>
-                <Footer
+                {/* <Footer
                     style={{
                         textAlign: 'center',
                         background: '#333',
@@ -36,7 +37,7 @@ class App extends Component {
                         color: '#fff'
                     }}
                     className="center"
-                ></Footer>
+                ></Footer> */}
             </Layout>
         );
     }

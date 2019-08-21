@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.less';
-// import '@/iconfont/iconfont.css';
+import '@/iconfont/iconfont.css';
 import 'core-js'; // 兼容IE处理
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
