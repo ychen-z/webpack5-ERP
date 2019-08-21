@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const paths = require('./path');
+const getLessVariables = require('./../src/utils/get-less-variables');
 // const PnpWebpackPlugin = require('pnp-webpack-plugin'); 看看是否必须
 // const HappyPack = require('happypack');
 // const os = require('os');
@@ -263,9 +264,7 @@ module.exports = {
                             {
                                 importLoaders: 3,
                                 sourceMap: isProduction ? shouldUseSourceMap : isDevelopment,
-                                modifyVars: {
-                                    'primary-color': '#e6231f'
-                                },
+                                modifyVars: getLessVariables(['src/assets/css/variables.less', 'src/assets/css/antd-reset.less']),
                                 javascriptEnabled: true
                             },
                             'less-loader'
