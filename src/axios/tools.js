@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { message } from 'antd';
-import { rootURL, isMock } from './config';
+import { rootURL, isMock, ServerCode, ServerCodeMap, RedirectMap } from './config';
 
 const service = axios.create({
     baseURL: rootURL, // api的base_url
@@ -22,72 +22,16 @@ service.interceptors.request.use(
 
 // response拦截器
 service.interceptors.response.use(
+    // HTTP的状态码(只有200才走这里)
     response => {
-        const data = response.data;
-        switch (data.code) {
-            case 200:
-                // 这一步保证数据返回，如果没有return则会走接下来的代码，不是未登录就是报错
-                return response;
-            case 400:
-                // 这一步保证数据返回，如果没有return则会走接下来的代码，不是未登录就是报错
-                return response;
-            default:
-        }
-        // 若不是正确的返回code，且已经登录，就抛出错误
-        //   const err = new Error()
-        // let err = {};
-        // err.data = data;
-        // err.response = response;
-        // throw { data, response };
-        return Promise.reject({ data, response });
+        // 以下判断的是：接口状态码（data.code）
+        const res = response.data;
+        if ([ServerCode.SUCCESS, ServerCode.CONTINUE].includes(res.code)) return response;
+
+        return Promise.reject({ data: res, response });
     },
     err => {
-        // 非200、400的统一错误拦截
-        if (err && err.response) {
-            switch (err.response.status) {
-                case 401:
-                    err.message = `参数格式出错`;
-                    break;
-                case 402:
-                    err.message = `请求出错`;
-                    break;
-                case 403:
-                    window.location.replace('#/403');
-                    err.message = '拒绝访问';
-                    break;
-                case 404:
-                    err.message = `请求地址出错`;
-                    break;
-                case 406:
-                    window.location.replace('#/login');
-                    break;
-                case 408:
-                    err.message = '请求超时';
-                    break;
-                case 410:
-                    err.message = '参数错误';
-                    break;
-                case 500:
-                    err.message = '服务器内部错误';
-                    break;
-                case 501:
-                    err.message = '服务未实现';
-                    break;
-                case 502:
-                    err.message = '网关错误';
-                    break;
-                case 503:
-                    err.message = '服务不可用';
-                    break;
-                case 504:
-                    err.message = '网关超时';
-                    break;
-                case 505:
-                    err.message = 'HTTP版本不受支持';
-                    break;
-                default:
-            }
-        }
+        // 统一错误拦截
         return Promise.reject(err);
     }
 );
@@ -96,61 +40,23 @@ service.interceptors.response.use(
  * 四种请求方式
  * @param url       接口地址
  * @param data      接口参数（注：get后续将放入“含有params的对象”才能接到url；delete后续将放入“含有data属性的对象”才能通过payload传输）
- * @param msg       接口异常提示
  * @param headers   接口所需header配置
  */
-export const get = ({ url, data, msg, headers }) => response(service.get(url, { params: data }, headers));
-export const post = ({ url, data, msg, headers }) => response(service.post(url, data, headers));
-export const put = ({ url, data, msg, headers }) => response(service.put(url, data, headers));
-export const del = ({ url, data, msg, headers }) => response(service.delete(url, { data }, headers));
+export const get = ({ url, data, headers }) => response(service.get(url, { params: data }, headers));
+export const post = ({ url, data, headers }) => response(service.post(url, data, headers));
+export const put = ({ url, data, headers }) => response(service.put(url, data, headers));
+export const del = ({ url, data, headers }) => response(service.delete(url, { data }, headers));
 
-const response = (axiosObj, msg) => axiosObj.then(res => res.data).catch(err => errHandle(err, msg));
+const response = axiosObj => axiosObj.then(res => res.data).catch(err => errHandle(err));
 
-const errHandle = (err, msg = '接口异常') => {
-    switch (err.data && err.data.code) {
-        case 401:
-            err.message = err.data.msg || `参数格式出错`;
-            break;
-        case 402:
-            err.message = err.data.msg || `toast error msg`;
-            break;
-        case 403:
-            window.location.replace('#/403');
-            err.message = err.data.msg || '拒绝访问';
-            break;
-        case 404:
-            err.message = err.data.msg || `请求地址出错`;
-            break;
-        case 406:
-            window.location.replace('#/login');
-            break;
-        case 408:
-            err.message = err.data.msg || '请求超时';
-            break;
-        case 410:
-            err.message = err.data.msg || '参数错误';
-            break;
-        case 500:
-            err.message = err.data.msg || '服务器内部错误';
-            break;
-        case 501:
-            err.message = err.data.msg || '服务未实现';
-            break;
-        case 502:
-            err.message = err.data.msg || '网关错误';
-            break;
-        case 503:
-            err.message = err.data.msg || '服务不可用';
-            break;
-        case 504:
-            err.message = err.data.msg || '网关超时';
-            break;
-        case 505:
-            err.message = err.data.msg || 'HTTP版本不受支持';
-            break;
-        default:
-    }
-    message.error(err.message || msg);
+const errHandle = err => {
+    // 判断上下文是“接口状态码”还是“HTTP状态码”
+    let code = err.data ? err.data.code : err.response.status;
+    // 是否需要重定向到指定页
+    RedirectMap.hasOwnProperty(code) && window.location.replace(RedirectMap[code]);
+    err.message = ServerCodeMap[code] || '接口异常';
+    message.error(err.message);
+    return Promise.reject(err);
 };
 
 export default service;
