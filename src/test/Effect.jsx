@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useWindowSize } from '@/components/hooks/windowSize';
+import { useToggle } from '@/components/hooks/useToggle';
 import { Modal, Button } from 'antd';
 
-function Example() {
+export default function Example(spoilerText = 111) {
     const [count, setCount] = useState(200);
     const [open, setOpen] = useState(false);
     const windowSize = useWindowSize();
+
+    const [isVisible, toggleVisible] = useToggle(false);
 
     // 类似于componentDidMount 和 componentDidUpdate:
     useEffect(() => {
@@ -32,8 +35,11 @@ function Example() {
                 <p>Some contents...</p>
                 <p>Some contents...</p>
             </Modal>
+
+            <div>
+                <button onClick={toggleVisible}>{isVisible ? 'Hide' : 'Show'}</button>
+                {isVisible && <span>{spoilerText}</span>}
+            </div>
         </div>
     );
 }
-
-export default Example;

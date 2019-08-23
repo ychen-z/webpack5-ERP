@@ -33,7 +33,7 @@ class App extends Component {
                         textAlign: 'center',
                         background: '#333',
                         height: '120px',
-                        color: '#fff'
+                        color: '#FFFFFF'
                     }}
                     className="center"
                 ></Footer>
