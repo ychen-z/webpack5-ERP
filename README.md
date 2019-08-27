@@ -17,18 +17,18 @@
 
 -   [x] React v16.9.0
 -   [x] Webpack v4.39.1
--   [x] ESLint
--   [x] Prettier
--   [x] Stylelint
+-   [x] 校验工具：ESLint & Stylelint & Prettier
 -   [x] Husky
 -   [x] DLL 动态链接库
+-   [x] axios 目录结构整理
+-   [x] 支持全局引入 variables.less & antd-reset.less
 
 ## TODO
 
--   [ ] axios 目录结构整理
+-   [ ] proxy 整理
+-   [ ] redux & reducer 整理
 -   [ ] routes 目录结构整理
 -   [ ] 组件目录结构整理
--   [ ] 支持全局引入 variables.less
 -   [ ] webpack 多入口配置
 -   [ ] 引入 TypeScript（待定）
 -   [ ] 等...
