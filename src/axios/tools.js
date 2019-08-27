@@ -26,7 +26,7 @@ service.interceptors.response.use(
     response => {
         // 以下判断的是：接口状态码（data.code）
         const res = response.data;
-        if ([ServerCode.SUCCESS, ServerCode.CONTINUE].includes(res.code)) return response;
+        if (res.code === ServerCode.SUCCESS) return response.data;
 
         return Promise.reject({ data: res, response });
     },
@@ -55,8 +55,9 @@ const errHandle = err => {
     // 是否需要重定向到指定页
     RedirectMap.hasOwnProperty(code) && window.location.replace(RedirectMap[code]);
     err.message = ServerCodeMap[code] || '接口异常';
-    message.error(err.message);
-    return Promise.reject(err);
+    // 若code是400，则不会弹出message
+    code !== ServerCode.CONTINUE ? message.error(err.message) : console.error(err);
+    return Promise.reject(err.data || {});
 };
 
 export default service;

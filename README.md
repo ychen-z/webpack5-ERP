@@ -101,6 +101,15 @@ project
 -   v0.0.1 —— 2019-08-20
     -   模板项目雏形
     -   引入 hooks 参考 doc/hook.md
+    -   优化axios目录结构
+
+-   v0.0.2 —— 2019-08-21
+    -   优化axios，对Server错误进行统一处理
+    -   语义化Server Code
+    -   支持全局引入"variables.less"
+
+-   v0.0.3 —— 2019-08-27
+    -   优化axios响应拦截器，直接返回response.data至业务层
 
 ## License
 
