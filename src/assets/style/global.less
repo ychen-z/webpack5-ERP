@@ -1,0 +1,40 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+#root {
+    min-width: 1200px;
+    height: 100%;
+}
+
+// 布局
+.g-layout-1200 {
+    width: 1200px;
+    margin: 0 auto;
+    background: transparent;
+}
+
+.gutter-layout {
+    .ant-row {
+        > div {
+            background: transparent;
+            border: 0;
+        }
+    }
+}
+
+.gutter-box {
+    padding: 5px 0;
+}
+
+//美化webkit内核滚动条
+::-webkit-scrollbar {
+    width: 3px;
+    height: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #CCC;
+}

@@ -1,0 +1,38 @@
+.vertical-center-modal {
+    text-align: center;
+    white-space: nowrap;
+
+    &::before {
+        display: inline-block;
+        width: 0;
+        height: 100%;
+        vertical-align: middle;
+        content: "";
+    }
+
+    .ant-modal {
+        top: 0;
+        display: inline-block;
+        min-width: 500px !important;
+        text-align: left;
+        vertical-align: middle;
+    }
+}
+
+.ant-modal-title {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+}
+
+.ant-modal-body {
+    padding: 40px !important;
+}
+
+.ant-modal-footer {
+    padding: 16px !important;
+    text-align: center !important;
+
+    button {
+        min-width: 110px;
+    }
+}

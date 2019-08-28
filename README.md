@@ -111,6 +111,9 @@ project
 -   v0.0.3 —— 2019-08-27
     -   优化axios响应拦截器，直接返回response.data至业务层
 
+-   v0.0.4 —— 2019-08-28
+    -   增加全局样式
+
 ## License
 
 The code is distributed under the [MIT](https://opensource.org/licenses/MIT) license
