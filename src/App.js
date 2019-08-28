@@ -21,22 +21,14 @@ class App extends Component {
     render() {
         const { user } = this.props;
         return (
-            <Layout style={{ flexDirection: 'column' }}>
-                <HeaderCustom toggle={this.toggle} collapsed={this.state.collapsed} user={user || {}} />
-                <Content style={{ overflow: 'initial', flex: '1 1 0' }}>
+            <Layout>
+                <HeaderCustom user={user || {}} />
+                <Content>
                     <LocaleProvider locale={zhCN}>
                         <Routes user={user} />
                     </LocaleProvider>
                 </Content>
-                <Footer
-                    style={{
-                        textAlign: 'center',
-                        background: '#333',
-                        height: '120px',
-                        color: '#FFFFFF'
-                    }}
-                    className="center"
-                ></Footer>
+                <Footer className="center">2019 @react.16.8</Footer>
             </Layout>
         );
     }

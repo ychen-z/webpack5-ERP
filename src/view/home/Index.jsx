@@ -8,7 +8,6 @@ export default class Home extends Component {
         let param = { name: '123' };
         getLoginInfo(param)
             .then(data => {
-                // data即为response.data
                 console.log(data, 456);
             })
             .catch(err => {
@@ -21,7 +20,7 @@ export default class Home extends Component {
 
     render() {
         return (
-            <div>
+            <div className="m-home">
                 首页
                 <Button type="primary" onClick={this.getData}>
                     首页按钮
