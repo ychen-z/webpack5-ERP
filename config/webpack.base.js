@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const glob = require('glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackBar = require('webpackbar');
@@ -29,6 +29,53 @@ const shouldUseSourceMap = paths.sourceMap;
 // style files regexes
 const cssRegex = /\.css$/;
 const lessRegex = /\.less$/;
+
+//修改webpack.base.conf.js代码
+// 获取html-webpack-plugin参数的方法
+let getHtmlConfig = function (name, chunks,title) {
+    return {
+        template: `./src/page/${name}/index.html`,
+		filename: `${name}.html`,
+        // favicon: './favicon.ico',
+        title: title,
+        inject: true, // 是否将js放在body的末尾
+        hash: false, // 防止缓存，在引入的文件后面加hash (PWA就是要缓存，这里设置为false)
+        chunksSortMode: 'dependency',
+        chunks: chunks,//页面要引入的包
+        minify: process.env.NODE_ENV === "development" ? false : {
+            removeComments: true,
+            collapseWhitespace: true,
+            conservativeCollapse: true,
+            preserveLineBreaks: true,
+            removeAttributeQuotes: true,
+            removeEmptyAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            keepClosingSlash: true,
+            minifyJS: true,
+            minifyCSS: true,
+            minifyURLs: true,
+            useShortDoctype: true,
+            html5: true
+        }
+    };
+};
+
+//动态添加入口
+function getEntry(PAGES_DIR) {
+	var entry = {};
+	//读取src目录所有page入口
+	glob.sync(PAGES_DIR + '**/*.js').forEach(function (name) {
+		var start = name.indexOf('page/') + 4;
+		var end = name.length - 3;
+		var eArr = [];
+		var n = name.slice(start, end);
+		n = n.split('/')[1];
+		eArr.push(name);
+		entry[n] = eArr;
+	})
+	return entry;
+}
+let entrys = getEntry('./src/page/')
 
 
 /**
@@ -145,7 +192,12 @@ module.exports = {
     // cache: {
     //     type: 'filesystem'
     // },
-    entry: paths.appIndexJs,
+    entry: {
+        // 多入口文件
+        index: [paths.appIndexJs],
+        login: paths.appLoginJs
+    },
+
     output: {
         path: paths.appBuild,
         // Add /* filename */ comments to generated require()s in the output. This does
@@ -360,31 +412,31 @@ module.exports = {
         //     loaders: ['babel-loader?cacheDirectory']
         // }),
 
-        new HtmlWebpackPlugin({
-            inject: true, // 是否将js放在body的末尾
-            hash: false, // 防止缓存，在引入的文件后面加hash (PWA就是要缓存，这里设置为false)
-            // template: require('html-webpack-template'), template:
-            // 'node_modules/html-webpack-template/index.ejs',
-            template: paths.appHtml,
-            mobile: true,
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                conservativeCollapse: true,
-                preserveLineBreaks: true,
-                removeAttributeQuotes: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true,
-                useShortDoctype: true,
-                html5: true
-            },
-            chunksSortMode: 'dependency'
-            // scripts: ['./dll/vendor.dll.js'] // 与dll配置文件中output.fileName对齐
-        }),
+        // new HtmlWebpackPlugin({
+        //     inject: true, // 是否将js放在body的末尾
+        //     hash: false, // 防止缓存，在引入的文件后面加hash (PWA就是要缓存，这里设置为false)
+        //     // template: require('html-webpack-template'), template:
+        //     // 'node_modules/html-webpack-template/index.ejs',
+        //     template: paths.appHtml,
+        //     mobile: true,
+        //     minify: {
+        //         removeComments: true,
+        //         collapseWhitespace: true,
+        //         conservativeCollapse: true,
+        //         preserveLineBreaks: true,
+        //         removeAttributeQuotes: true,
+        //         removeEmptyAttributes: true,
+        //         removeStyleLinkTypeAttributes: true,
+        //         keepClosingSlash: true,
+        //         minifyJS: true,
+        //         minifyCSS: true,
+        //         minifyURLs: true,
+        //         useShortDoctype: true,
+        //         html5: true
+        //     },
+        //     chunksSortMode: 'dependency'
+        //     // scripts: ['./dll/vendor.dll.js'] // 与dll配置文件中output.fileName对齐
+        // }),
 
         new webpack.DllReferencePlugin({
             manifest: path.join(paths.vendor, 'react.manifest.json')
@@ -416,3 +468,19 @@ module.exports = {
     },
     performance: false
 };
+
+
+//修改   自动化配置页面
+let htmlArray = [];
+Object.keys(entrys).forEach(function (element) {
+	htmlArray.push({
+		_html: element,
+		title: '',
+		chunks: [element]
+	})
+})
+
+//自动生成html模板
+htmlArray.forEach((element) => {
+	module.exports.plugins.push(new HtmlWebpackPlugin(getHtmlConfig(element._html, element.chunks)));
+})

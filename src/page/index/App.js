@@ -5,12 +5,12 @@ import HeaderCustom from '@/components/header/Index';
 import { receiveData, fetchData } from '@/store/action';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Routes from './routes';
+import Routes from '@/routes';
 // 全局组件“中文”配置
 import moment from 'moment';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
-import zh_CN from './locales/zh-CN';
-import en_US from './locales/en-US';
+import zh_CN from '@/locales/zh-CN';
+import en_US from '@/locales/en-US';
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
 

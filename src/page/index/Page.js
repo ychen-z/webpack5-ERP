@@ -3,10 +3,6 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import E403 from '@/view/exception/403';
 import E404 from '@/view/exception/404';
 import E500 from '@/view/exception/500';
-import Lazy from '@/test/Lazy';
-import DerivedStateFromProps from '@/test/DerivedStateFromProps';
-import Context from '@/test/Context';
-import ErrorCatch from '@/test/ErrorCatch';
 import App from './App';
 
 export default () => (
@@ -17,10 +13,6 @@ export default () => (
             <Route path="/404" name="404" component={E404} />
             <Route path="/403" name="403" component={E403} />
             <Route path="/500" name="500" component={E500} />
-            <Route path="/lazy" name="Lazy" component={Lazy} />
-            <Route path="/getDerivedStateFromProps" name="DerivedStateFromProps" component={DerivedStateFromProps} />
-            <Route path="/context" name="Context" component={Context} />
-            <Route path="/error" name="ErrorCatch" component={ErrorCatch} />
             <Route component={E404} />
         </Switch>
     </Router>
