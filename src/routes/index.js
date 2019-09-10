@@ -4,7 +4,7 @@ import { routes } from './route';
 
 export default class CRouter extends Component {
     requireAuth = Com => {
-        return <Com />;
+        return <Com {...this.props} />;
     };
 
     render() {
