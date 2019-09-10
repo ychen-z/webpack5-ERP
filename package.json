@@ -92,6 +92,7 @@
     "webpackbar": "^4.0.0"
   },
   "dependencies": {
+    "@hot-loader/react-dom": "^16.9.0",
     "ant-design-pro": "^0.3.1",
     "antd": "3.20.1",
     "axios": "^0.19.0",

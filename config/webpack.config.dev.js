@@ -7,6 +7,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     cache: true,
     devtool: 'source-map',
     plugins: [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()],
+    resolve: {
+        alias: {
+            'react-dom': '@hot-loader/react-dom'
+        }
+    },
     devServer: {
         // 为了减少输出量，可以只显示错误
         // 开发环境的 host 和 port，允许自定义
@@ -18,6 +23,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         open: true, // 浏览器自启动
         quiet: true,
         overlay: true, // 开启浏览器端的错误浮层功能
+        hot: true,
         proxy: {
             '/mock': {
                 target: 'http://localhost:3000',
