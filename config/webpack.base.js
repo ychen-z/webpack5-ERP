@@ -367,6 +367,7 @@ module.exports = {
             // 'node_modules/html-webpack-template/index.ejs',
             template: paths.appHtml,
             mobile: true,
+            favicon: './public/favicon.ico',
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
