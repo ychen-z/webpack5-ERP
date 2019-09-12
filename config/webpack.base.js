@@ -1,12 +1,13 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const WebpackBar = require('webpackbar');
-const paths = require('./path');
-const getLessVariables = require('./../src/utils/get-less-variables');
+/* eslint-disable */
+const path = require("path");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const WebpackBar = require("webpackbar");
+const paths = require("./path");
+const getLessVariables = require("./../src/utils/get-less-variables");
 // const PnpWebpackPlugin = require('pnp-webpack-plugin'); 看看是否必须
 // const HappyPack = require('happypack');
 // const os = require('os');
@@ -15,116 +16,34 @@ const getLessVariables = require('./../src/utils/get-less-variables');
 //     size: os.cpus().length
 // });
 
-/* eslint-disable */
-function resolve(dir) {
-    return path.resolve(__dirname, '..', dir)
-}
-
 const isProduction = paths.isProduction;
-const sourceMap = paths.sourceMap;
 const isDevelopment = !isProduction;
-const publicPath = '/';
+const publicPath = "/";
 const shouldUseSourceMap = paths.sourceMap;
 
 // style files regexes
 const cssRegex = /\.css$/;
 const lessRegex = /\.less$/;
 
-
-/**
- * 统一处理css-loader
- * @param {*} options
- */
-function cssLoaders(options) {
-    options = options || {}
-
-    const cssLoader = {
-        loader: 'css-loader',
-        options: {
-            sourceMap: options.sourceMap
-        }
-    }
-    if (options.modules) {
-        cssLoader.options = {
-            ...cssLoader.options,
-            ...{
-                modules: true,
-                importLoaders: 1,
-                localIdentName: '[name]__[local]--[hash:base64:5]'
-            }
-        }
-    }
-
-    const postcssLoader = {
-        loader: 'postcss-loader',
-        options: {
-            sourceMap: options.sourceMap,
-            ident: 'postcss',
-            plugins: [
-                // eslint-disable-next-line
-                require('postcss-preset-env')()
-            ]
-        }
-    }
-
-    // generate loader string to be used with extract text plugin
-    function generateLoaders(loader, loaderOptions) {
-        const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
-
-        if (loader) {
-            loaders.push({
-                loader: `${loader}-loader`,
-                options: Object.assign({}, loaderOptions, { sourceMap: options.sourceMap })
-            })
-        }
-
-        // Extract CSS when that option is specified (which is the case during
-        // production build)
-        if (options.extract) {
-            loaders.unshift(MiniCssExtractPlugin.loader)
-
-            return loaders
-            // return ExtractTextPlugin.extract({use: loaders, fallback: 'style-loader'});
-        }
-        // mini-css-extract-plugin 不支持css热更新。因此需在开发环境引入 css-hot-loader，以便支持css热更新
-        return ['css-hot-loader', 'style-loader'].concat(loaders)
-    }
-
-    // https://vue-loader.vuejs.org/en/configurations/extract-css.html
-    return {
-        css: generateLoaders(),
-        postcss: generateLoaders(),
-        less: generateLoaders('less', {
-            javascriptEnabled: true, modifyVars: {
-                'primary-color': '#e6231f'
-            },
-        }),
-        sass: generateLoaders('sass', { indentedSyntax: true }),
-        scss: generateLoaders('sass'),
-        stylus: generateLoaders('stylus'),
-        styl: generateLoaders('stylus')
-    }
-}
-
 const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
         isProduction && MiniCssExtractPlugin.loader,
-        !isProduction && require.resolve('style-loader'),
+        !isProduction && require.resolve("style-loader"),
         {
-            loader: require.resolve('css-loader'),
+            loader: require.resolve("css-loader"),
             options: cssOptions
         },
         {
-            loader: require.resolve('postcss-loader'),
+            loader: require.resolve("postcss-loader"),
             options: {
-                ident: 'postcss',
+                ident: "postcss",
                 plugins: () => [
-                    require('postcss-flexbugs-fixes'),
-                    require('postcss-preset-env')({
+                    require("postcss-flexbugs-fixes"),
+                    require("postcss-preset-env")({
                         autoprefixer: {
-                            flexbox: 'no-2009'
+                            flexbox: "no-2009"
                         },
-                        browsers: ['> 1%', 'last 2 versions'], // autoprefixer 前缀命令
+                        browsers: ["> 1%", "last 2 versions"], // autoprefixer 前缀命令
                         stage: 3
                     })
                 ],
@@ -135,48 +54,33 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
     if (preProcessor) {
         loaders.push({
             loader: require.resolve(preProcessor),
-            options: Object.assign({}, { sourceMap: isProduction ? shouldUseSourceMap : !isProduction }, cssOptions)
+            options: Object.assign(
+                {},
+                { sourceMap: isProduction ? shouldUseSourceMap : !isProduction },
+                cssOptions
+            )
         });
     }
     return loaders;
 };
 
+// 参考文档：https://zhuanlan.zhihu.com/p/45506253
 module.exports = {
-    // cache: {
-    //     type: 'filesystem'
-    // },
     entry: paths.appIndexJs,
     output: {
         path: paths.appBuild,
-        // Add /* filename */ comments to generated require()s in the output. This does
-        // not produce a real file. It's just the virtual path that is served by
-        // WebpackDevServer in development. This is the JS bundle containing code from
-        // all our entry points, and the Webpack runtime.
-        filename: 'static/js/bundle.js',
-        // There are also additional JS chunk files if you use code splitting.
-        chunkFilename: 'static/js/[name].chunk.js',
-        // This is the URL that app is served from. We use "/" in development.
+        filename: "static/js/bundle.js",
+        chunkFilename: "static/js/[name].chunk.js",
         publicPath: publicPath,
-        // Point sourcemap entries to original disk location (format as URL on Windows)
-        devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
+        devtoolModuleFilenameTemplate: info =>
+            path.resolve(info.absoluteResourcePath).replace(/\\/g, "/")
     },
     resolve: {
-        // This allows you to set a fallback for where Webpack should look for modules.
-        // We placed these paths second because we want `node_modules` to "win" if there
-        // are any conflicts. This matches Node resolution mechanism.
         // https://github.com/facebookincubator/create-react-app/issues/253
-        modules: ['node_modules', paths.appNodeModules],
-        // These are the reasonable defaults supported by the Node ecosystem. We also
-        // include JSX as a common component filename extension to support some tools,
-        // although we do not recommend using it, see:
-        // https://github.com/facebookincubator/create-react-app/issues/290 `web`
-        // extension prefixes have been added for better support for React Native Web.
-        extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx'],
+        modules: ["node_modules", paths.appNodeModules],
+        extensions: [".js", ".json", ".jsx"],
         alias: {
-            // Support React Native Web
-            // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-
-            // native-for-web/ 'react-native': 'react-native-web', 全局相对路径别名，处理相对路径过长和繁琐问题
-            '@': paths.appSrc,
+            "@": paths.appSrc
         }
         // plugins: [PnpWebpackPlugin]
     },
@@ -188,60 +92,56 @@ module.exports = {
             // Disable require.ensure as it's not a standard language feature.
             { parser: { requireEnsure: false } },
 
-            // First, run the linter.
-            // It's important to do this before Babel processes the JS.
             {
                 test: /\.(js|jsx)$/,
-                enforce: 'pre',
+                enforce: "pre",
                 use: [
                     {
                         options: {
-                            formatter: require.resolve('react-dev-utils/eslintFormatter'),
-                            eslintPath: require.resolve('eslint')
+                            formatter: require.resolve("react-dev-utils/eslintFormatter"),
+                            eslintPath: require.resolve("eslint")
                         },
-                        loader: require.resolve('eslint-loader')
+                        loader: require.resolve("eslint-loader")
                     }
                 ],
                 include: paths.appSrc
             },
             {
-                // "oneOf" will traverse all following loaders until one will
-                // match the requirements. When no loader matches it will fall
-                // back to the "file" loader at the end of the loader list.
                 oneOf: [
-                    // "url" loader works like "file" loader except that it embeds assets
-                    // smaller than specified limit in bytes as data URLs to avoid requests.
-                    // A missing `test` is equivalent to a match.
                     {
                         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-                        loader: require.resolve('url-loader'),
+                        loader: require.resolve("url-loader"),
                         options: {
                             limit: 10000,
-                            name: 'static/media/[name].[hash:8].[ext]'
+                            name: "static/media/[name].[hash:8].[ext]"
                         }
                     },
-                    // Process any JS outside of the app with Babel.
-                    // Unlike the application JS, we only compile the standard ES features.
+                    //  参考：https://juejin.im/post/5bff60ab5188250f3e1d2933
                     {
                         test: /\.(js|jsx)$/,
                         include: paths.appSrc,
                         exclude: /node_modules/,
-                        loader: require.resolve('babel-loader'),
+                        loader: require.resolve("babel-loader"),
                         //use: 'happypack/loader?id=babel',
                         options: {
-                            customize: require.resolve('babel-preset-react-app/webpack-overrides'),
+                            customize: require.resolve(
+                                "babel-preset-react-app/webpack-overrides"
+                            ),
                             plugins: [
                                 [
-                                    require.resolve('babel-plugin-named-asset-import'),
+                                    require.resolve("babel-plugin-named-asset-import"),
                                     {
                                         loaderMap: {
                                             svg: {
-                                                ReactComponent: '@svgr/webpack?-svgo![path]'
+                                                ReactComponent: "@svgr/webpack?-svgo![path]"
                                             }
                                         }
                                     }
                                 ],
-                                ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]
+                                [
+                                    "import",
+                                    { libraryName: "antd", libraryDirectory: "es", style: true }
+                                ]
                             ],
                             cacheDirectory: true,
                             cacheCompression: isProduction,
@@ -256,18 +156,20 @@ module.exports = {
                     // By default we support CSS Modules with the extension .module.css
 
                     // Opt-in support for LESS (using .less extensions).
-                   
-                   
+
                     {
                         test: lessRegex,
                         use: getStyleLoaders(
                             {
                                 importLoaders: 3,
                                 sourceMap: isProduction ? shouldUseSourceMap : isDevelopment,
-                                modifyVars: getLessVariables(['src/assets/css/variables.less', 'src/assets/css/antd-reset.less']),
+                                modifyVars: getLessVariables([
+                                    "src/assets/css/variables.less",
+                                    "src/assets/css/antd-reset.less"
+                                ]),
                                 javascriptEnabled: true
                             },
-                            'less-loader'
+                            "less-loader"
                         ),
                         sideEffects: true
                     },
@@ -280,53 +182,6 @@ module.exports = {
                             importLoaders: 1
                         })
                     },
-
-                    // {
-                    //     test: /\.css$/,
-                    //     use: cssLoaders({
-                    //         sourceMap,
-                    //         extract: isProduction,
-                    //         usePostCSS: true,
-                    //         modules: true
-                    //     }).css,
-                    //     include: paths.appSrc
-                    // },
-                    // {
-                    //     test: /\.css$/,
-                    //     use: cssLoaders({
-                    //         sourceMap,
-                    //         extract: isProduction,
-                    //         usePostCSS: true,
-                    //         modules: false
-                    //     }).css,
-                    //     include: resolve('node_modules')
-                    // },
-
-                    // {
-                    //     test: /\.less$/,
-                    //     use: cssLoaders({
-                    //         sourceMap,
-                    //         extract: isProduction,
-                    //         usePostCSS: true,
-                    //         modules: true,
-                    //         javascriptEnabled: true
-                    //     }).less,
-                    //     include: paths.appSrc
-                    // },
-
-                    // {
-                    //     test: /\.less?$/, // (用于解析antd的LESS文件)
-                    //     // 把对 .less 文件的处理转交给 id 为 less 的 HappyPack 实例
-                    //     include: [resolve('node_modules/antd')],
-                    //     // use: 'happypack/loader?id=node_modules_less'
-                    //     use: cssLoaders({
-                    //         sourceMap,
-                    //         extract: isProduction,
-                    //         usePostCSS: true,
-                    //         modules: false
-                    //     }).less
-                    // },
-
                     // "file" loader makes sure those assets get served by WebpackDevServer.
                     // When you `import` an asset, you get its (virtual) filename.
                     // In production, they would get copied to the `build` folder.
@@ -338,19 +193,16 @@ module.exports = {
                         // Also exclude `html` and `json` extensions so they get processed
                         // by webpacks internal loaders.
                         exclude: [/\.(js|jsx)$/, /\.html$/, /\.json$/],
-                        loader: require.resolve('file-loader'),
+                        loader: require.resolve("file-loader"),
                         options: {
-                            name: 'static/media/[name].[hash:8].[ext]'
+                            name: "static/media/[name].[hash:8].[ext]"
                         }
                     }
                 ]
             }
-            // ** STOP ** Are you adding a new loader?
-            // Make sure to add the new loader(s) before the "file" loader.
         ]
     },
     plugins: [
-       
         // new HappyPack({
         //     // 用唯一的标识符 id 来代表当前的 HappyPack 是用来处理一类特定的文件
         //     id: 'babel',
@@ -363,8 +215,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             inject: true, // 是否将js放在body的末尾
             hash: false, // 防止缓存，在引入的文件后面加hash (PWA就是要缓存，这里设置为false)
-            // template: require('html-webpack-template'), template:
-            // 'node_modules/html-webpack-template/index.ejs',
             template: paths.appHtml,
             mobile: true,
             minify: {
@@ -382,37 +232,43 @@ module.exports = {
                 useShortDoctype: true,
                 html5: true
             },
-            chunksSortMode: 'dependency'
+            chunksSortMode: "dependency"
             // scripts: ['./dll/vendor.dll.js'] // 与dll配置文件中output.fileName对齐
         }),
 
         new webpack.DllReferencePlugin({
-            manifest: path.join(paths.vendor, 'react.manifest.json')
+            manifest: path.join(paths.vendor, "react.manifest.json")
         }),
 
         new CopyWebpackPlugin([
             {
                 from: paths.vendor, //静态资源目录源地址
-                to: path.join(paths.appBuild, 'vendor') //目标地址，相对于output的path目录
+                to: path.join(paths.appBuild, "vendor") //目标地址，相对于output的path目录
             }
         ]),
 
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         // 与 devServer watchOptions 并存，不监听node_modules
-        new webpack.WatchIgnorePlugin([path.join(__dirname, 'node_modules')]),
+        new webpack.WatchIgnorePlugin([path.join(__dirname, "node_modules")]),
         new WebpackBar({
             minimal: false,
             compiledIn: false
         })
     ],
     node: {
-        module: 'empty',
-        dgram: 'empty',
-        dns: 'mock',
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty',
-        child_process: 'empty'
+        dgram: "empty",
+        fs: "empty",
+        net: "empty",
+        tls: "empty",
+        child_process: "empty"
     },
-    performance: false
+
+    performance: {
+        hints: false
+    },
+
+    optimization: {
+        namedModules: true,
+        nodeEnv: "development"
+    }
 };

@@ -6,7 +6,6 @@ class DerivedStateFromProps extends Component {
     };
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        debugger;
         if (nextProps.a !== prevState.a) {
             return {
                 a: nextProps.a

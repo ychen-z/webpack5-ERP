@@ -1372,6 +1372,63 @@ antd@3.20.1:
     shallowequal "^1.1.0"
     warning "~4.0.3"
 
+antd@^3.9.1:
+  version "3.23.1"
+  resolved "https://registry.yarnpkg.com/antd/-/antd-3.23.1.tgz#a251b0cdc2072a91a8c157f8b31de8ad92ce5d18"
+  dependencies:
+    "@ant-design/create-react-context" "^0.2.4"
+    "@ant-design/icons" "~2.1.1"
+    "@ant-design/icons-react" "~2.0.1"
+    "@types/react-slick" "^0.23.4"
+    array-tree-filter "^2.1.0"
+    babel-runtime "6.x"
+    classnames "~2.2.6"
+    copy-to-clipboard "^3.2.0"
+    css-animation "^1.5.0"
+    dom-closest "^0.2.0"
+    enquire.js "^2.1.6"
+    lodash "^4.17.13"
+    moment "^2.24.0"
+    omit.js "^1.0.2"
+    prop-types "^15.7.2"
+    raf "^3.4.1"
+    rc-animate "^2.8.3"
+    rc-calendar "~9.15.5"
+    rc-cascader "~0.17.4"
+    rc-checkbox "~2.1.6"
+    rc-collapse "~1.11.3"
+    rc-dialog "~7.5.2"
+    rc-drawer "~2.0.1"
+    rc-dropdown "~2.4.1"
+    rc-editor-mention "^1.1.13"
+    rc-form "^2.4.5"
+    rc-input-number "~4.5.0"
+    rc-mentions "~0.4.0"
+    rc-menu "~7.4.23"
+    rc-notification "~3.3.1"
+    rc-pagination "~1.20.5"
+    rc-progress "~2.5.0"
+    rc-rate "~2.5.0"
+    rc-select "~9.2.0"
+    rc-slider "~8.6.11"
+    rc-steps "~3.5.0"
+    rc-switch "~1.9.0"
+    rc-table "~6.7.0"
+    rc-tabs "~9.6.4"
+    rc-time-picker "~3.7.1"
+    rc-tooltip "~3.7.3"
+    rc-tree "~2.1.0"
+    rc-tree-select "~2.9.1"
+    rc-trigger "^2.6.2"
+    rc-upload "~2.7.0"
+    rc-util "^4.10.0"
+    react-lazy-load "^3.0.13"
+    react-lifecycles-compat "^3.0.4"
+    react-slick "~0.25.2"
+    resize-observer-polyfill "^1.5.1"
+    shallowequal "^1.1.0"
+    warning "~4.0.3"
+
 anymatch@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/anymatch/download/anymatch-2.0.0.tgz#bcb24b4f37934d9aa7ac17b4adaf89e7c76ef2eb"
@@ -1540,6 +1597,12 @@ asynckit@^0.4.0:
 atob@^2.1.1:
   version "2.1.2"
   resolved "https://registry.npm.taobao.org/atob/download/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
+
+ats-antd@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ats-antd/-/ats-antd-1.0.0.tgz#7ba3b5124168509f5810375743f02fd67b01c838"
+  dependencies:
+    antd "^3.9.1"
 
 autoprefixer@^9.5.1, autoprefixer@^9.6.1:
   version "9.6.1"
@@ -7349,7 +7412,7 @@ rc-animate@^3.0.0-rc.1:
     rc-util "^4.5.0"
     react-lifecycles-compat "^3.0.4"
 
-rc-calendar@~9.15.0:
+rc-calendar@~9.15.0, rc-calendar@~9.15.5:
   version "9.15.5"
   resolved "https://registry.npm.taobao.org/rc-calendar/download/rc-calendar-9.15.5.tgz?cache=0&sync_timestamp=1564543244802&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frc-calendar%2Fdownload%2Frc-calendar-9.15.5.tgz#21ab0cb2a5659d85fe6faead13d3ed764dd47c01"
   dependencies:
@@ -7401,6 +7464,14 @@ rc-dialog@~7.4.0:
     rc-animate "2.x"
     rc-util "^4.4.0"
 
+rc-dialog@~7.5.2:
+  version "7.5.7"
+  resolved "https://registry.yarnpkg.com/rc-dialog/-/rc-dialog-7.5.7.tgz#1f47b24bffab2bf878be33316b28a617b8a4747a"
+  dependencies:
+    babel-runtime "6.x"
+    rc-animate "2.x"
+    rc-util "^4.8.1"
+
 rc-drawer@~1.10.1:
   version "1.10.1"
   resolved "https://registry.npm.taobao.org/rc-drawer/download/rc-drawer-1.10.1.tgz#9a74242cf37f5709f83483a987e15d68277afe44"
@@ -7409,6 +7480,15 @@ rc-drawer@~1.10.1:
     classnames "^2.2.5"
     prop-types "^15.5.0"
     rc-util "^4.5.1"
+
+rc-drawer@~2.0.1:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/rc-drawer/-/rc-drawer-2.0.8.tgz#ba0500590804283308f77acc22fff35f395e979a"
+  dependencies:
+    babel-runtime "6.x"
+    classnames "^2.2.5"
+    rc-util "^4.7.0"
+    react-lifecycles-compat "^3.0.4"
 
 rc-dropdown@~2.4.1:
   version "2.4.1"
@@ -7475,12 +7555,33 @@ rc-input-number@~4.4.5:
     rc-util "^4.5.1"
     rmc-feedback "^2.0.0"
 
+rc-input-number@~4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/rc-input-number/-/rc-input-number-4.5.0.tgz#0e1728101fcec2ee0bce4e20bf84c669895c4fb9"
+  dependencies:
+    babel-runtime "6.x"
+    classnames "^2.2.0"
+    prop-types "^15.5.7"
+    rc-util "^4.5.1"
+    rmc-feedback "^2.0.0"
+
 rc-mentions@~0.3.1:
   version "0.3.1"
   resolved "https://registry.npm.taobao.org/rc-mentions/download/rc-mentions-0.3.1.tgz#7c54f8fbd2e203c56ff4e0a0191ce4a2c9a88c86"
   dependencies:
     "@ant-design/create-react-context" "^0.2.4"
     babel-runtime "^6.23.0"
+    classnames "^2.2.6"
+    rc-menu "^7.4.22"
+    rc-trigger "^2.6.2"
+    rc-util "^4.6.0"
+    react-lifecycles-compat "^3.0.4"
+
+rc-mentions@~0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/rc-mentions/-/rc-mentions-0.4.0.tgz#483552c088290dbcddd059a0846e9f207ecc3539"
+  dependencies:
+    "@ant-design/create-react-context" "^0.2.4"
     classnames "^2.2.6"
     rc-menu "^7.4.22"
     rc-trigger "^2.6.2"
@@ -7513,7 +7614,7 @@ rc-notification@~3.3.1:
     rc-animate "2.x"
     rc-util "^4.0.4"
 
-rc-pagination@~1.20.1:
+rc-pagination@~1.20.1, rc-pagination@~1.20.5:
   version "1.20.5"
   resolved "https://registry.npm.taobao.org/rc-pagination/download/rc-pagination-1.20.5.tgz?cache=0&sync_timestamp=1564396310218&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frc-pagination%2Fdownload%2Frc-pagination-1.20.5.tgz#b64395a702e9fc452e26d0e491ccf7d9345309f7"
   dependencies:
@@ -7555,6 +7656,23 @@ rc-select@~9.1.4:
     react-lifecycles-compat "^3.0.2"
     warning "^4.0.2"
 
+rc-select@~9.2.0:
+  version "9.2.1"
+  resolved "https://registry.yarnpkg.com/rc-select/-/rc-select-9.2.1.tgz#0fbf47a933c36e1e6ef76c88fab32f58029e6a01"
+  dependencies:
+    babel-runtime "^6.23.0"
+    classnames "2.x"
+    component-classes "1.x"
+    dom-scroll-into-view "1.x"
+    prop-types "^15.5.8"
+    raf "^3.4.0"
+    rc-animate "2.x"
+    rc-menu "^7.3.0"
+    rc-trigger "^2.5.4"
+    rc-util "^4.0.4"
+    react-lifecycles-compat "^3.0.2"
+    warning "^4.0.2"
+
 rc-slider@~8.6.11:
   version "8.6.13"
   resolved "https://registry.npm.taobao.org/rc-slider/download/rc-slider-8.6.13.tgz#88a8150c2dda6709f3f119135de11fba80af765b"
@@ -7576,6 +7694,15 @@ rc-steps@~3.4.1:
     lodash "^4.17.5"
     prop-types "^15.5.7"
 
+rc-steps@~3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/rc-steps/-/rc-steps-3.5.0.tgz#36b2a7f1f49907b0d90363884b18623caf9fb600"
+  dependencies:
+    babel-runtime "^6.23.0"
+    classnames "^2.2.3"
+    lodash "^4.17.5"
+    prop-types "^15.5.7"
+
 rc-switch@~1.9.0:
   version "1.9.0"
   resolved "https://registry.npm.taobao.org/rc-switch/download/rc-switch-1.9.0.tgz#ab2b878f2713c681358a453391976c9b95b290f7"
@@ -7587,6 +7714,21 @@ rc-switch@~1.9.0:
 rc-table@~6.6.0:
   version "6.6.8"
   resolved "https://registry.npm.taobao.org/rc-table/download/rc-table-6.6.8.tgz#4b18bfebc499f37a2a33b2bccd0ddcf3ecd3a9b6"
+  dependencies:
+    babel-runtime "6.x"
+    classnames "^2.2.5"
+    component-classes "^1.2.6"
+    lodash "^4.17.5"
+    mini-store "^2.0.0"
+    prop-types "^15.5.8"
+    rc-util "^4.0.4"
+    react-lifecycles-compat "^3.0.2"
+    shallowequal "^1.0.2"
+    warning "^3.0.0"
+
+rc-table@~6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/rc-table/-/rc-table-6.7.0.tgz#8aca002f84a43a2d51a4fcda0f7a51694154286d"
   dependencies:
     babel-runtime "6.x"
     classnames "^2.2.5"
@@ -7705,9 +7847,28 @@ rc-upload@~2.6.7:
     prop-types "^15.5.7"
     warning "4.x"
 
+rc-upload@~2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/rc-upload/-/rc-upload-2.7.0.tgz#f279b758655eb5f99ebf82a5a2648d80d88e0ff4"
+  dependencies:
+    babel-runtime "6.x"
+    classnames "^2.2.5"
+    prop-types "^15.5.7"
+    warning "4.x"
+
 rc-util@^4.0.4, rc-util@^4.1.0, rc-util@^4.1.1, rc-util@^4.3.0, rc-util@^4.4.0, rc-util@^4.5.0, rc-util@^4.5.1, rc-util@^4.6.0, rc-util@^4.8.0:
   version "4.8.6"
   resolved "https://registry.npm.taobao.org/rc-util/download/rc-util-4.8.6.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frc-util%2Fdownload%2Frc-util-4.8.6.tgz#e39b902427d710300d934d6df7b6c2e7a8fd0936"
+  dependencies:
+    add-dom-event-listener "^1.1.0"
+    babel-runtime "6.x"
+    prop-types "^15.5.10"
+    react-lifecycles-compat "^3.0.4"
+    shallowequal "^0.2.2"
+
+rc-util@^4.10.0, rc-util@^4.7.0, rc-util@^4.8.1:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/rc-util/-/rc-util-4.11.0.tgz#cf437dcff74ca08a8565ae14f0368acb3a650796"
   dependencies:
     add-dom-event-listener "^1.1.0"
     babel-runtime "6.x"
@@ -7916,6 +8077,16 @@ react-side-effect@^1.0.2:
 react-slick@~0.24.0:
   version "0.24.0"
   resolved "https://registry.npm.taobao.org/react-slick/download/react-slick-0.24.0.tgz#1a4e078a82de4e9458255d9ce26aa6f3b17b168b"
+  dependencies:
+    classnames "^2.2.5"
+    enquire.js "^2.1.6"
+    json2mq "^0.2.0"
+    lodash.debounce "^4.0.8"
+    resize-observer-polyfill "^1.5.0"
+
+react-slick@~0.25.2:
+  version "0.25.2"
+  resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.25.2.tgz#56331b67d47d8bcfe2dceb6acab1c8fd5bd1f6bc"
   dependencies:
     classnames "^2.2.5"
     enquire.js "^2.1.6"

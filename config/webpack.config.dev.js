@@ -8,11 +8,6 @@ const webpackConfig = merge(baseWebpackConfig, {
     devtool: 'source-map',
     plugins: [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()],
     devServer: {
-        // 为了减少输出量，可以只显示错误
-        // 开发环境的 host 和 port，允许自定义
-        // 如果你使用 Docker, Vagrant 或 Cloud9 虚拟机，
-        // 你可以设置 host: "0.0.0.0";
-        // 不像默认的 `localhost`，0.0.0.0 适用于所有的网络设备。
         host: process.env.HOST, // 默认是：`localhost`
         port: process.env.PORT, // 默认是：8080
         open: true, // 浏览器自启动
