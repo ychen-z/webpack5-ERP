@@ -41,6 +41,5 @@ export const ServerCodeMap = {
 
 export const RedirectMap = {
     [ServerCode.FORBIDDEN]: '#/403',
-    [ServerCode.WRONG_URL]: '#/404',
     [ServerCode.NO_LOGIN]: '#/login'
 };

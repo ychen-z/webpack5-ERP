@@ -8,10 +8,6 @@ const load = (name, loader) =>
         loading: MyLoadingComponent
     });
 
-const Home = load('首页', () => import('@/view/home/Index'));
-const Intl = load('首页', () => import('@/view/intl/Index'));
-
-export default {
-    Home,
-    Intl
-};
+export const Home = load('首页', () => import('@/view/home/Index'));
+export const Intl = load('国际化', () => import('@/view/intl/Index'));
+export const Hooks = load('hooks', () => import('@/view/hooks/Index'));

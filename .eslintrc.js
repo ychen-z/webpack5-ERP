@@ -7,7 +7,7 @@ module.exports = {
         ecmaFeatures: { 'jsx': true } //启用JSX
     },
 
-    plugins: ['prettier'],
+    plugins: ['prettier', 'react-hooks'],
 
     rules: {
         'arrow-parens': ['error', 'as-needed'], // 箭头函数参数只有一个时，可以省略参数的括号，否则error提示
@@ -20,6 +20,10 @@ module.exports = {
 
         'prettier/prettier': 'warn', // 对于prettier报错进行warn提醒
 
-        'jsx-a11y/anchor-has-content': 'off'
+        'jsx-a11y/anchor-has-content': 'off',
+
+        "react-hooks/rules-of-hooks": "error",
+
+        "react-hooks/exhaustive-deps": "warn"
     }
 }

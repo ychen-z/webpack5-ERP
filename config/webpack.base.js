@@ -217,6 +217,7 @@ module.exports = {
             hash: false, // 防止缓存，在引入的文件后面加hash (PWA就是要缓存，这里设置为false)
             template: paths.appHtml,
             mobile: true,
+            favicon: './public/favicon.ico',
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,

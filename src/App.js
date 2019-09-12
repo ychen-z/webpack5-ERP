@@ -3,6 +3,7 @@ import { Layout, LocaleProvider } from 'antd';
 import { IntlProvider } from 'react-intl';
 import HeaderCustom from '@/components/header/Index';
 import { receiveData, fetchData } from '@/store/action';
+import { hot } from 'react-hot-loader/root';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Routes from './routes';
@@ -90,4 +91,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(App);
+)(hot(App));
