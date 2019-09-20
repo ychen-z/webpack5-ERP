@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { zh_CN, en_US } from '../../locales/index.js';
+import { zh_CN, en_US } from '@/locales/index.js';
 
 export function useLanguage(lang) {
     let [language] = useState(lang);
