@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import zh_CN from './zh-CN';
-import en_US from './en-US';
+import { zh_CN, en_US } from '../../locales/index.js';
 
 export function useLanguage(lang) {
-    let [language] = useState('zh');
+    let [language] = useState(lang);
     let locale;
     let messages;
 
