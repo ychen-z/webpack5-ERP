@@ -51,7 +51,7 @@ const response = axiosObj => axiosObj.then(res => res.data).catch(err => errHand
 
 const errHandle = err => {
     // 判断上下文是“接口状态码”还是“HTTP状态码”
-    let code = err.data ? err.data.code : err.response.status;
+    let code = err.data ? err.data.code : (err.response || {}).status;
     // 是否需要重定向到指定页
     RedirectMap.hasOwnProperty(code) && window.location.replace(RedirectMap[code]);
     err.message = ServerCodeMap[code] || '接口异常';

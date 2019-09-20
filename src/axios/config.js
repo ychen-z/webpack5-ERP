@@ -3,7 +3,7 @@ export const isDev = process.env.NODE_ENV === 'development';
 export const isMock = true;
 export const isTest = false;
 
-export const rootURL = isDev ? (isMock ? '/mock/dev' : isTest ? '/test' : '/dev') : '/';
+export const rootURL = isDev ? (isMock ? '/mock' : isTest ? '/test' : '/dev') : '/';
 
 export const ServerCode = {
     SUCCESS: 200,
