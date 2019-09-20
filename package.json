@@ -94,7 +94,7 @@
   "dependencies": {
     "@hot-loader/react-dom": "^16.9.0",
     "ant-design-pro": "^0.3.1",
-    "antd": "3.20.1",
+    "antd": "3.23.3",
     "axios": "^0.19.0",
     "ats-antd": "^1.0.0",
     "echarts-for-react": "^1.4.4",
