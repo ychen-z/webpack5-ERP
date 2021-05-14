@@ -1,0 +1,7 @@
+{
+  "types": [
+    {"type": "feature", "section": "新特性", "hidden": false},
+    {"type": "jira", "section":"jira", "hidden":false},
+    {"type": "fix", "section": "Bug Fixes", "hidden": false}
+  ]
+}

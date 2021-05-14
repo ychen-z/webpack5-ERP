@@ -21,17 +21,17 @@ function App(props) {
     const [locale, messages] = useLanguage('zh');
 
     return (
-        <Layout>
-            <IntlProvider locale={locale} messages={messages.locale}>
-                <HeaderCustom user={user || {}} />
-                <Content>
-                    <ConfigProvider locale={messages.antd}>
+        <ConfigProvider locale={messages.antd} prefixCls="pre">
+            <Layout>
+                <IntlProvider locale={locale} messages={messages.locale}>
+                    <HeaderCustom user={user || {}} />
+                    <Content>
                         <Routes user={user} />
-                    </ConfigProvider>
-                </Content>
-                <Footer className="center">2019 @react 16.9.0</Footer>
-            </IntlProvider>
-        </Layout>
+                    </Content>
+                    <Footer className="center">2019 @react 16.9.0</Footer>
+                </IntlProvider>
+            </Layout>
+        </ConfigProvider>
     );
 }
 
@@ -45,7 +45,4 @@ const mapDispatchToProps = dispatch => ({
     receiveData: bindActionCreators(receiveData, dispatch)
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(hot(App));
+export default connect(mapStateToProps, mapDispatchToProps)(hot(App));

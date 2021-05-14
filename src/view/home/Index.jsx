@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'antd';
 import Example from '@/components/example';
 import { getUserInfo } from '@/axios/api';
+import styles from './index.module.less';
 
 export default class Home extends Component {
     getData = () => {
@@ -21,10 +22,12 @@ export default class Home extends Component {
     render() {
         return (
             <div className="m-home">
+                <span className={styles.title}>1111111</span>
                 首页
                 <Button type="primary" onClick={this.getData}>
                     首页按钮
                 </Button>
+                <div className={styles.content}>content</div>
                 <Example />
             </div>
         );
