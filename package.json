@@ -122,7 +122,7 @@
         "@types/classnames": "^2.2.9",
         "@types/react-loadable": "^5.5.3",
         "antd": "^4.11.2",
-        "axios": "^0.19.0",
+        "axios": "^0.21.1",
         "classnames": "^2.2.6",
         "core-js": "^3.6.5",
         "crypto-js": "^4.0.0",
