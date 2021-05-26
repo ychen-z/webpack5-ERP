@@ -78,3 +78,20 @@ export const formatTime = (time, type = 'hour') => {
     if (!h && m) return `${m}min`;
     return;
 };
+
+export const sortData = data => {
+    const d = deepClone(data);
+    // 按照sort排序
+    d.sort((a, b) => {
+        return a.sort - b.sort;
+    });
+    return d;
+};
+
+export const guid = () => {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (Math.random() * 16) | 0,
+            v = c == 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+    });
+};

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
-import Example from '@/components/example';
 import { getUserInfo } from '@/axios/api';
 import styles from './index.module.less';
 
@@ -28,7 +27,6 @@ export default class Home extends Component {
                     首页按钮
                 </Button>
                 <div className={styles.content}>content</div>
-                <Example />
             </div>
         );
     }
