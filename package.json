@@ -1,6 +1,6 @@
 {
     "name": "webpack_5",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "homepage": ".",
     "private": true,
     "main": "index.js",
