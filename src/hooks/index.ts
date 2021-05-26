@@ -23,5 +23,7 @@ export {
     useForceUpdate,
     useControllableValue,
     useInterval,
-    usePagination
+    usePagination,
+    useWindowSize,
+    useToggle
 };

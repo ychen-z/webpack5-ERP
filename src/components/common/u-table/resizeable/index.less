@@ -1,0 +1,28 @@
+.m-resize-table {
+    .salon-table-content {
+        overflow: scroll;
+    }
+
+    .react-resizable {
+        position: relative;
+        background-clip: padding-box;
+    }
+
+    .react-resizable-handle {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        width: 8px;
+        height: 100%;
+        text-align: center;
+        cursor: col-resize;
+
+        .line {
+            display: inline-block;
+            width: 2px;
+            height: 100%;
+            background-color: @border-color;
+        }
+    }
+}

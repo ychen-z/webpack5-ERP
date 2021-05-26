@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useWindowSize } from '@/components/hooks/windowSize';
-import { useToggle } from '@/components/hooks/useToggle';
+import { useWindowSize, useToggle } from '@/hooks';
 import { Modal, Button } from 'antd';
 
 export default function Example(spoilerText = 111) {

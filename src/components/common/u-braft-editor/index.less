@@ -1,0 +1,86 @@
+.m-braftEditor {
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+
+    &.m-braftEditor-simple {
+        .bf-content {
+            height: 120px;
+        }
+    }
+
+    .bf-controlbar {
+        box-shadow: inset 0 -1px 0 0 #D9D9D9;
+    }
+
+    .salon-upload-select {
+        display: inline !important;
+    }
+
+    .u-keyWords {
+        padding: 10px 10px;
+        border-bottom: 1px solid #D9D9D9;
+    }
+
+    .edit-preview {
+        background-color: @background !important;
+    }
+}
+
+// 富文本预览（因为富文本编辑器输出的html样式并不能保证所见即所得，故需在此手动设置一些预览时样式）
+.m-editor-preview {
+    max-height: 70vh;
+    padding: 15px;
+    overflow-y: scroll;
+    word-break: break-all;
+    background: #F9F8FF;
+    border-radius: 5px;
+
+    p {
+        min-height: 1em;
+        margin: 0;
+        white-space: pre-wrap;
+    }
+
+    pre {
+        padding: 15px;
+        background-color: #F1F1F1;
+        border-radius: 5px;
+    }
+
+    img {
+        display: block;
+        font-size: 0;
+        resize: both;
+        outline-offset: 1px;
+    }
+
+    img, audio, video {
+        max-width: 100%;
+        height: auto;
+    }
+
+    blockquote {
+        padding: 15px;
+        margin: 0;
+        background-color: #F1F1F1;
+        border-left: 3px solid #D1D1D1;
+    }
+}
+
+// 可选字段样式
+.m-braftEditor, .m-editor-preview {
+    .keyword-item {
+        position: relative;
+        box-sizing: border-box;
+        height: 22px;
+        padding: 0 7px;
+        margin: 0 2px;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: unset;
+        user-select: none;
+        background: #FAFAFA;
+        border: 1px solid #D9D9D9;
+        border-radius: 4px;
+    }
+}
