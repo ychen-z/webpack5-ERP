@@ -27,7 +27,7 @@ module.exports = {
     },
     resolve: {
         modules: ['node_modules', paths.appNodeModules],
-        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', "css"],
+        extensions: ['.tsx', '.ts', '.js', '.jsx', '.json'],
         alias: {
             '@': paths.appSrc
         },

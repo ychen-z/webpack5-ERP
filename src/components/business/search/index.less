@@ -1,0 +1,46 @@
+.m-search {
+    position: relative;
+    padding: 24px;
+    margin-bottom: 24px;
+    background: @white;
+
+    .salon-form-item-label {
+        color: @dark;
+    }
+
+    .expand {
+        font-size: 12px;
+        text-align: center;
+
+        button {
+            width: 60px;
+        }
+    }
+
+    .search-section {
+        flex: 1;
+        overflow: hidden;
+        transition: height .3s ease-in-out;
+
+        .search-item {
+            min-height: 50px;
+
+            &-vertical {
+                min-height: 85px;
+            }
+
+            .salon-form-item {
+                margin-top: 5px;
+                margin-bottom: 0;
+            }
+        }
+
+        .search-item-expand {
+            margin-top: 5px;
+
+            button {
+                margin-left: 10px;
+            }
+        }
+    }
+}

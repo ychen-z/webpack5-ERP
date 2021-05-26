@@ -95,3 +95,25 @@ export const guid = () => {
         return v.toString(16);
     });
 };
+
+export const dataToJson = (one, data) => {
+    let kids;
+    if (!one) {
+        // 第1次递归
+        kids = data.filter(item => !item.parentId);
+    } else {
+        kids = data.filter(item => item.parentId === one.id);
+    }
+    kids.forEach(item => (item.children = dataToJson(item, data)));
+    return kids.length ? kids : [];
+};
+
+export const makeSourceData = data => {
+    const d = deepClone(data);
+    // 按照sort排序
+    d.sort((a, b) => {
+        return a.sort - b.sort;
+    });
+    const sourceData = dataToJson(null, d) || [];
+    return sourceData;
+};

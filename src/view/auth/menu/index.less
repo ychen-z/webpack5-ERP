@@ -1,0 +1,43 @@
+.m-menu {
+    &-body {
+        display: flex;
+        padding: 20px;
+        background: #FFF;
+
+        .l {
+            width: 256px;
+            border: solid 1px #F0F0F0;
+
+            .title {
+                box-sizing: border-box;
+                height: 44px;
+                padding: 0 10px;
+                font-size: 14px;
+                line-height: 44px;
+                border-bottom: 1px solid #F0F0F0;
+            }
+
+            .tree {
+                padding-top: 10px;
+            }
+        }
+
+        .r {
+            flex: 1;
+            padding-left: 24px;
+            margin-left: 16px;
+            border: solid 1px #F0F0F0;
+
+            .searchBox {
+                margin: 12px 0;
+
+                & > ul {
+                    & > li + li {
+                        flex: none;
+                        margin-left: 4px;
+                    }
+                }
+            }
+        }
+    }
+}
