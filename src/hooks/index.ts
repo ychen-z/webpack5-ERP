@@ -9,6 +9,8 @@ import useControllableValue from './common/useControllableValue';
 import useInterval from './common/useInterval';
 import useTab from './common/useTab';
 import usePagination from './common/usePagination';
+import { useWindowSize } from './common/windowSize';
+import { useToggle } from './common/useToggle';
 
 export {
     useDebounce,

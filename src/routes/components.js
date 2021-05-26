@@ -11,3 +11,4 @@ const load = (name, loader) =>
 export const Home = load('首页', () => import('@/view/home/Index'));
 export const Intl = load('国际化', () => import('@/view/intl/Index'));
 export const Hooks = load('hooks', () => import('@/view/hooks/Index'));
+export const Demo = load('demo', () => import('@/view/page'));
